@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/styles.css' %}?{% now "U" %}">
+{% endblock %}
+
+{% block authentication %}
+
+    <div class="container">
+
+        {% if form.errors %}
+            <div class="error-container">
+                {% for message in form.errors.values %}
+                    <div class="error-list">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="signup-form">
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+
+                <h1>Inscrivez-vous sur LitReview</h1>
+
+                <div class="content">
+                    <div class="input-field">
+                        {{ form.username }}
+                        <label class="input-label" for="username">{{ form.username.label }}</label>
+                    </div>
+
+                    <div class="input-field">
+                        {{ form.email }}
+                        <label class="input-label" for="email">{{ form.email.label }}</label>
+                    </div>
+
+                    <div class="input-field">
+                        {{ form.first_name }}
+                        <label class="input-label" for="first_name">{{ form.first_name.label }}</label>
+                    </div>
+
+                    <div class="input-field">
+                        {{ form.last_name }}
+                        <label class="input-label" for="last_name">{{ form.last_name.label }}</label>
+                    </div>
+
+                    <div class="input-field">
+                        {{ form.password1 }}
+                        <label class="input-label">{{ form.password1.label }}</label>
+                    </div>
+
+                    <div class="input-field">
+                        {{ form.password2 }}
+                        <label class="input-label">{{ form.password2.label }}</label>
+                    </div>
+
+                </div>
+
+                <div class="action">
+                    <button type="submit">S’inscrire</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="signup-link">
+            <a href="{% url 'login' %}">Se connecter</a>
+        </div>
+    </div>
+
+{% endblock authentication %}

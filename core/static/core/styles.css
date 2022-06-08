@@ -1,0 +1,161 @@
+body {
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, #002b36, rgba(0, 94, 120, 1) 94.2%);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 1% 0 3% 0;
+}
+
+.login-form, .signup-form {
+    background: #fff;
+    width: 550px;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 5px 9px 25px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-form h1, .signup-form h1 {
+    padding: 2% 2% 0 5%;
+    font-weight: 800;
+    font-size: 35px;
+    background-image: linear-gradient(109.6deg, rgba(0, 191, 165, 1) 11.2%, rgba(0, 140, 122, 1) 100.2%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-form .content, .signup-form .content {
+    padding: 5%;
+    text-align: center;
+}
+
+.login-form .input-field, .signup-form .input-field {
+    padding: 12px 5px;
+    position: relative;
+}
+
+.login-form .input-field input, .signup-form .input-field input {
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    padding: 10px 1px;
+    border: 0;
+    border-bottom: 2px solid rgba(0, 191, 165, 0.25);
+    outline: none;
+    transition: border-color 0.6s;
+}
+
+.login-form .input-field .input-label, .signup-form .input-field .input-label {
+    position: absolute;
+    bottom: 20px;
+    left: 8px;
+    transition: all .3s;
+    font-size: 20px;
+}
+
+.input:focus + .input-label,
+.input:not(:placeholder-shown).input:not(:focus) ~ .input-label {
+    bottom: 50px;
+    color: #858585;
+    font-size: 12px;
+}
+
+.login-form .input-field input:focus, .signup-form .input-field input:focus {
+    border-color: rgba(0, 191, 165, 1);
+}
+
+.login-form a.link {
+    text-decoration: none;
+    color: #747474;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.login-form .action, .signup-form .action {
+    display: flex;
+    flex-direction: row;
+}
+
+.login-form .action button, .signup-form .action button {
+    width: 100%;
+    border: none;
+    padding: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    background: #e8e9ec;
+    color: #777;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    letter-spacing: 1px;
+    outline: 0;
+    -webkit-transition: all .5s;
+    transition: color, background-color .5s;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.login-form .action button:hover, .signup-form .action button:hover {
+    color: #004037;
+    background-color: rgba(0, 140, 122, 0.45);
+}
+
+.login-form .action button:nth-child(2), .signup-form .action button:nth-child(2) {
+    background: #2d3b55;
+    color: #fff;
+}
+
+.login-form .action button:nth-child(2):hover, .signup-form .action button:nth-child(2):hover {
+    background: #3c4d6d;
+}
+
+.signup-link {
+    display: flex;
+    justify-content: center;
+}
+
+.signup-link a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: text-shadow .5s;
+}
+
+.signup-link a:hover {
+    text-shadow: 1px 4px 8px #04290f;
+}
+
+.error-container {
+    width: 35%;
+}
+
+.error-list {
+    background-color: #ffc4c4;
+    padding: 1%;
+    border: 2px solid #c40000;
+    border-radius: 8px;
+    margin: 5px 0;
+}
+
+.error-list li {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.errorlist {
+    list-style: none;
+}
+
+.main-container {
+    display: inline
+}

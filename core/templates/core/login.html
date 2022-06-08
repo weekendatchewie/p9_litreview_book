@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/styles.css' %}?{% now "U" %}">
+{% endblock %}
+
+{% block authentication %}
+    <div class="container">
+        <div class="login-form">
+            <form action="" method="post">
+
+                {% csrf_token %}
+
+                <h1>LitReview</h1>
+                <div class="content">
+                    <div class="input-field">
+                        <input class="input" id="username" name="username" value="{{ user.username }}" placeholder=" "
+                               autocomplete="off">
+                        <label class="input-label" for="username">{{ form.username.label }}</label>
+                    </div>
+                    <div class="input-field">
+                        <input class="input" type="password" id="password" name="password" placeholder=" ">
+                        <label class="input-label" for="password">{{ form.password.label }}</label>
+                    </div>
+
+                </div>
+                <div class="action">
+                    <button type="submit">Se connecter</button>
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="signup-link">
+            <a href="{% url 'signup' %}">S'inscrire</a>
+        </div>
+    </div>
+
+{% endblock %}

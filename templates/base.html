@@ -1,0 +1,26 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LitReview</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'base/styles.css' %}?{% now "U" %}">
+    {% block statics %}{% endblock %}
+
+</head>
+<body>
+
+{% block authentication %}{% endblock %}
+
+<div class="main-container">
+    {% if request.user.is_authenticated and not request.path == '/signup/' and not request.path == '/' %}
+        {% include 'sidebar.html' %}
+    {% endif %}
+
+    <div class="main">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

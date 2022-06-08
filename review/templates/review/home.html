@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'review/styles.css' %}?{% now "U" %}">
+{% endblock %}
+
+{% block content %}
+
+    <div>
+        <h1>Bienvenue {{ user }}</h1>
+    </div>
+
+{% endblock %}

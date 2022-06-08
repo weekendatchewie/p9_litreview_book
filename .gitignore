@@ -4,6 +4,9 @@
 *.pyc
 __pycache__
 
+#### A RETIRER APRES FINALISATION ####
+db.sqlite3
+
 media
 
 # Backup files #
