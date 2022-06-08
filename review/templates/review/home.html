@@ -10,6 +10,19 @@
 
     <div>
         <h1>Bienvenue {{ user }}</h1>
+
+        <a href="{% url 'ticket-create' %}">Créer Ticket</a>
+    </div>
+
+    <div class="container">
+        {% for ticket in tickets %}
+            <p>{{ ticket.title }}</p>
+            <p>{{ ticket.description }}</p>
+            <img src="{{ ticket.image.url }}" alt="">
+        {% empty %}
+            <p>Oups rien de publié</p>
+        {% endfor %}
+
     </div>
 
 {% endblock %}
