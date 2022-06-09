@@ -14,7 +14,7 @@
 
 <div class="main-container">
     {% if request.user.is_authenticated and not request.path == '/signup/' and not request.path == '/' %}
-        {% include 'sidebar.html' %}
+        {% include 'navbar.html' %}
     {% endif %}
 
     <div class="main">

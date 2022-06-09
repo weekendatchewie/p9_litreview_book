@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="bloc-form-container">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ ticket_form.as_p }}
+            {{ review_form.as_p }}
+
+            <button type="submit">Valider</button>
+
+        </form>
+
+    </div>
+
+{% endblock %}

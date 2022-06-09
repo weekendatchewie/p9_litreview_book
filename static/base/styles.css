@@ -13,7 +13,7 @@
     flex-direction: row;
 }
 
-.sidebar {
+.navbar {
     background-color: #002B36;
     height: 70px;
     width: 100%;
@@ -31,7 +31,7 @@
     margin-top: 125px;
 }
 
-.sidebar-content {
+.navbar-content {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -40,7 +40,7 @@
     align-items: center;
 }
 
-.sidebar-link, .sidebar-link-deconnect {
+.navbar-link, .navbar-link-deconnect {
     text-decoration: none;
     color: antiquewhite;
     font-size: 16px;
@@ -48,10 +48,10 @@
     transition: color 0.4s;
 }
 
-.sidebar-link:hover {
+.navbar-link:hover {
     color: #009BC2;
 }
 
-.sidebar-link-deconnect:hover {
+.navbar-link-deconnect:hover {
     color: #b54141;
 }

@@ -21,7 +21,7 @@ class LoginPage(View):
             "message": message,
         }
 
-        return render(request, self.template_name, context)
+        return render(request, "core/login.html", context)
 
     def post(self, request):
         form = self.form_class(request.POST)

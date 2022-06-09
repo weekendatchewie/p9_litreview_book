@@ -22,6 +22,9 @@ class HomePage(View):
 
 
 class TicketCreate(View):
+    """
+    Create a ticket to ask a review to another users
+    """
 
     form_class = forms.TicketForm
 
@@ -43,3 +46,47 @@ class TicketCreate(View):
             ticket.save()
 
             return redirect('home')
+
+
+class ReviewCreate(View):
+    """
+    Create a ticket and review from the user himself
+    """
+
+    ticket_form_class = forms.TicketForm
+    review_form_class = forms.ReviewForm
+
+    def get(self, request):
+        ticket_form = self.ticket_form_class()
+        review_form = self.review_form_class()
+
+        context = {
+            "ticket_form": ticket_form,
+            "review_form": review_form
+        }
+
+        return render(request, 'review/review_create.html', context)
+
+    def post(self, request):
+
+        ticket_form = self.ticket_form_class(request.POST, request.FILES)
+        review_form = self.review_form_class(request.POST)
+
+        if all([ticket_form.is_valid(), review_form.is_valid()]):
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+
+            review = review_form.save(commit=False)
+            review.ticket = ticket
+            review.user = request.user
+            review.save()
+
+            return redirect('home')
+
+
+class ReviewAnswerToTicket(View):
+    """
+    Answer to a ticket from another user, with a review
+    """
+    pass
