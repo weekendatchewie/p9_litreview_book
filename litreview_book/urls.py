@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('home/', login_required(review.views.HomePage.as_view()), name='home'),
     path('ticket/create', login_required(review.views.TicketCreate.as_view()), name='ticket-create'),
+    path('ticket/<int:ticket_id>/review-answer', login_required(review.views.ReviewAnswerToTicket.as_view()),
+         name='review-answer'),
     path('review/create', login_required(review.views.ReviewCreate.as_view()), name='review-create'),
 
 ]

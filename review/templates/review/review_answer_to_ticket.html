@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="bloc-form-container">
+
+        <p>{{ ticket.title }}</p>
+        <img src="{{ ticket.image.url }}" alt="">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ review_form.as_p }}
+
+            <button type="submit">Valider</button>
+
+        </form>
+
+    </div>
+
+{% endblock %}

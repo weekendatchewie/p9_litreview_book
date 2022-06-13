@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from itertools import chain
+
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from review import forms
-from review.models import Ticket
+from review.models import Ticket, Review
 
 
 class HomePage(View):
@@ -12,10 +14,18 @@ class HomePage(View):
         user = request.user.username
 
         tickets = Ticket.objects.all()
+        reviews = Review.objects.all()
+
+        """
+        La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis, 
+        comme s’il s’agissait d’une seule séquence d’objets.
+        """
+        tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
 
         context = {
             'user': user,
-            'tickets': tickets
+            'tickets': tickets,
+            'tickets_and_reviews': tickets_and_reviews
         }
 
         return render(request, "review/home.html", context)
@@ -89,4 +99,31 @@ class ReviewAnswerToTicket(View):
     """
     Answer to a ticket from another user, with a review
     """
-    pass
+    review_form_class = forms.ReviewForm
+
+    def get(self, request, ticket_id):
+
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+        review_form = self.review_form_class()
+
+        context = {
+            "ticket": ticket,
+            "review_form": review_form,
+        }
+
+        return render(request, 'review/review_answer_to_ticket.html', context)
+
+    def post(self, request, ticket_id):
+        review_form = self.review_form_class(request.POST)
+
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+        if review_form.is_valid():
+
+            review = review_form.save(commit=False)
+            review.ticket = ticket
+            review.user = request.user
+            review.save()
+
+            return redirect('home')
