@@ -1,7 +1,9 @@
 from itertools import chain
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import DeleteView
 
 from review import forms
 from review.models import Ticket, Review
@@ -92,6 +94,12 @@ class TicketUpdate(View):
         return redirect('tickets_reviews_feed')
 
 
+class TicketDelete(DeleteView):
+    model = Ticket
+    template_name = "review/review_delete.html"
+    success_url = reverse_lazy("tickets_reviews_feed")
+
+
 class ReviewCreate(View):
     """
     Create a ticket and review from the user himself
@@ -154,6 +162,12 @@ class ReviewUpdate(View):
             review_form.save()
 
             return redirect('tickets_reviews_feed')
+
+
+class ReviewDelete(DeleteView):
+    model = Review
+    template_name = "review/review_delete.html"
+    success_url = reverse_lazy("tickets_reviews_feed")
 
 
 class ReviewAnswerToTicket(View):

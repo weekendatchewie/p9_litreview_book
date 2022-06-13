@@ -26,9 +26,11 @@ urlpatterns = [
     path('ticket/<int:ticket_id>/update', login_required(review.views.TicketUpdate.as_view()), name='ticket-update'),
     path('ticket/<int:ticket_id>/review-answer', login_required(review.views.ReviewAnswerToTicket.as_view()),
          name='review-answer'),
+    path('ticket/<int:pk>/delete', login_required(review.views.TicketDelete.as_view()), name="ticket-delete"),
 
     path('review/create', login_required(review.views.ReviewCreate.as_view()), name='review-create'),
     path('review/<int:review_id>/update', login_required(review.views.ReviewUpdate.as_view()), name='review-update'),
+    path('review/<int:pk>/delete', login_required(review.views.ReviewDelete.as_view()), name="review-delete"),
 
 ]
 

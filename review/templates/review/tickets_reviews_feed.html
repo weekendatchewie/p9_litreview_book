@@ -29,14 +29,15 @@
                     {% endif %}
 
                     <a href="{% url 'ticket-update' instance.id %}">Modifier</a>
-                    <a href="#">Supprimer</a>
+                    <a href="{% url 'ticket-delete' instance.id %}">Supprimer</a>
+
 
                 {% elif instance|model_type == 'Review' %}
                     <p>{{ instance.headline }}</p>
                     <p>{{ instance.body }}</p>
 
                     <a href="{% url 'review-update' instance.id %}">Modifier</a>
-                    <a href="#">Supprimer</a>
+                    <a href="{% url 'review-delete' instance.id %}">Supprimer</a>
 
                 {% endif %}
 
