@@ -3,8 +3,9 @@ from itertools import chain
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, ListView
 
+from core.models import User
 from review import forms
 from review.models import Ticket, Review
 
@@ -200,3 +201,21 @@ class ReviewAnswerToTicket(View):
             review.save()
 
             return redirect('home')
+
+
+class UsersList(ListView):
+    """
+    On récupère la liste de tous les utilisateurs, on surcharge le get_queryset afin d'exclure l'utilisateur connecté
+    de la liste
+    """
+
+    model = User
+    paginate_by = 10
+    context_object_name = 'users'
+    template_name = 'review/users_list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        user = self.request.user
+        users = User.objects.all().exclude(id=user.id)
+
+        return users
