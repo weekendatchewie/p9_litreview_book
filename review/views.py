@@ -75,8 +75,23 @@ class TicketUpdate(View):
     def get(self, request, ticket_id):
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
+        form = forms.TicketForm(instance=ticket)
 
+        context = {
+            "form": form,
+        }
 
+        return render(request, 'review/ticket_update.html', context)
+
+    def post(self, request, ticket_id):
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+        form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
+
+        if form.is_valid():
+            form.save()
+
+        return redirect('tickets_reviews_feed')
 
 
 class ReviewCreate(View):

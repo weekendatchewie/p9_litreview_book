@@ -28,7 +28,7 @@
                              alt="default book">
                     {% endif %}
 
-                    <a href="#">Modifier</a>
+                    <a href="{% url 'ticket-update' instance.id %}">Modifier</a>
                     <a href="#">Supprimer</a>
 
                 {% elif instance|model_type == 'Review' %}
