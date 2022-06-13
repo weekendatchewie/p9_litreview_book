@@ -35,7 +35,7 @@
                     <p>{{ instance.headline }}</p>
                     <p>{{ instance.body }}</p>
 
-                    <a href="#">Modifier</a>
+                    <a href="{% url 'review-update' instance.id %}">Modifier</a>
                     <a href="#">Supprimer</a>
 
                 {% endif %}

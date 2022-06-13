@@ -20,12 +20,15 @@ urlpatterns = [
     path('password-done/', PasswordChangeDoneView.as_view(), name='password-done'),
 
     path('home/', login_required(review.views.HomePage.as_view()), name='home'),
+
     path('ticket/feed', login_required(review.views.TicketsReviewsFeed.as_view()), name='tickets_reviews_feed'),
     path('ticket/create', login_required(review.views.TicketCreate.as_view()), name='ticket-create'),
     path('ticket/<int:ticket_id>/update', login_required(review.views.TicketUpdate.as_view()), name='ticket-update'),
     path('ticket/<int:ticket_id>/review-answer', login_required(review.views.ReviewAnswerToTicket.as_view()),
          name='review-answer'),
+
     path('review/create', login_required(review.views.ReviewCreate.as_view()), name='review-create'),
+    path('review/<int:review_id>/update', login_required(review.views.ReviewUpdate.as_view()), name='review-update'),
 
 ]
 

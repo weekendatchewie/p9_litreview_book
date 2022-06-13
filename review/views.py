@@ -10,7 +10,6 @@ from review.models import Ticket, Review
 class HomePage(View):
 
     def get(self, request):
-
         user = request.user.username
 
         tickets = Ticket.objects.all()
@@ -61,7 +60,6 @@ class TicketCreate(View):
 class TicketsReviewsFeed(View):
 
     def get(self, request):
-
         tickets = Ticket.objects.filter(user=request.user)
         reviews = Review.objects.filter(user=request.user)
 
@@ -114,7 +112,6 @@ class ReviewCreate(View):
         return render(request, 'review/review_create.html', context)
 
     def post(self, request):
-
         ticket_form = self.ticket_form_class(request.POST, request.FILES)
         review_form = self.review_form_class(request.POST)
 
@@ -131,6 +128,34 @@ class ReviewCreate(View):
             return redirect('home')
 
 
+class ReviewUpdate(View):
+    review_form_class = forms.ReviewForm
+
+    def get(self, request, review_id):
+        ticket = get_object_or_404(Ticket, review__pk=review_id)
+
+        review = get_object_or_404(Review, id=review_id)
+
+        review_form = self.review_form_class(instance=review)
+
+        context = {
+            "ticket": ticket,
+            "review_form": review_form,
+        }
+
+        return render(request, 'review/review_update.html', context)
+
+    def post(self, request, review_id):
+        review = get_object_or_404(Review, id=review_id)
+
+        review_form = self.review_form_class(request.POST, instance=review)
+
+        if review_form.is_valid():
+            review_form.save()
+
+            return redirect('tickets_reviews_feed')
+
+
 class ReviewAnswerToTicket(View):
     """
     Answer to a ticket from another user, with a review
@@ -138,7 +163,6 @@ class ReviewAnswerToTicket(View):
     review_form_class = forms.ReviewForm
 
     def get(self, request, ticket_id):
-
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
         review_form = self.review_form_class()
@@ -156,7 +180,6 @@ class ReviewAnswerToTicket(View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
         if review_form.is_valid():
-
             review = review_form.save(commit=False)
             review.ticket = ticket
             review.user = request.user
