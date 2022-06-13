@@ -58,6 +58,27 @@ class TicketCreate(View):
             return redirect('home')
 
 
+class TicketsReviewsFeed(View):
+
+    def get(self, request):
+
+        tickets = Ticket.objects.filter(user=request.user)
+        reviews = Review.objects.filter(user=request.user)
+
+        tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
+
+        return render(request, 'review/tickets_reviews_feed.html', context={"tickets_and_reviews": tickets_and_reviews})
+
+
+class TicketUpdate(View):
+
+    def get(self, request, ticket_id):
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+
+
+
+
 class ReviewCreate(View):
     """
     Create a ticket and review from the user himself

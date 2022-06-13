@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load review_tags %}
+
+{% block content %}
+
+    <div>
+        <h1>Vos posts</h1>
+
+    </div>
+
+    <div class="container">
+
+        <div class="bloc-review">
+
+            {% for instance in tickets_and_reviews %}
+
+                {% if instance|model_type == 'Ticket' %}
+
+                    <a href="{% url 'review-answer' instance.id %}">Créer avis</a>
+                    <p>{{ instance.title }}</p>
+                    <p>{{ instance.description }}</p>
+                    {% if instance.image %}
+                        <img src="{{ instance.image.url }}" alt="">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzNzYzNn0?utm_source=dictionnaire&utm_medium=referral"
+                             alt="default book">
+                    {% endif %}
+
+                    <a href="#">Modifier</a>
+                    <a href="#">Supprimer</a>
+
+                {% elif instance|model_type == 'Review' %}
+                    <p>{{ instance.headline }}</p>
+                    <p>{{ instance.body }}</p>
+
+                    <a href="#">Modifier</a>
+                    <a href="#">Supprimer</a>
+
+                {% endif %}
+
+            {% empty %}
+                <p>Oups rien de publié</p>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
