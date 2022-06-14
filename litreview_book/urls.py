@@ -32,7 +32,9 @@ urlpatterns = [
     path('review/<int:review_id>/update', login_required(review.views.ReviewUpdate.as_view()), name='review-update'),
     path('review/<int:pk>/delete', login_required(review.views.ReviewDelete.as_view()), name="review-delete"),
 
-    path('users/list', login_required(review.views.UsersList.as_view()), name='users-list')
+    path('users/list', login_required(review.views.UsersList.as_view()), name='users-list'),
+    path('users/<int:pk>/followers/add', review.views.AddFollower.as_view(), name='add-follower'),
+    path('users/<int:pk>/followers/remove', review.views.Unfollow.as_view(), name='remove-follower'),
 
 ]
 

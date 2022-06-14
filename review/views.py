@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DeleteView, ListView
 
-from core.models import User
+from core.models import User, UserFollows
 from review import forms
 from review.models import Ticket, Review
 
@@ -203,19 +203,45 @@ class ReviewAnswerToTicket(View):
             return redirect('home')
 
 
-class UsersList(ListView):
+class UsersList(View):
     """
-    On récupère la liste de tous les utilisateurs, on surcharge le get_queryset afin d'exclure l'utilisateur connecté
-    de la liste
+    On récupère tous les utilisateurs excepté celui qui est connecté, et tous ses followers
     """
 
-    model = User
-    paginate_by = 10
-    context_object_name = 'users'
-    template_name = 'review/users_list.html'
+    def get(self, request):
+        user = request.user
+        users_to_follow = User.objects.all().exclude(id=request.user.id)
 
-    def get_queryset(self, *args, **kwargs):
-        user = self.request.user
-        users = User.objects.all().exclude(id=user.id)
+        list_follower = user.followers()
 
-        return users
+        user.followers()
+
+        context = {
+            "users_to_follow": users_to_follow,
+            "followers": list_follower,
+        }
+
+        return render(request, 'review/users_list.html', context)
+
+
+class AddFollower(View):
+
+    def post(self, request, pk, *args, **kwargs):
+        user = User.objects.get(pk=pk)
+
+        UserFollows.objects.create(user=request.user, followed_user=user)
+
+        return redirect('users-list')
+
+
+class Unfollow(View):
+
+    def post(self, request, pk, *args, **kwargs):
+
+        user = User.objects.get(pk=pk)
+
+        follow_user = UserFollows.objects.filter(user=request.user, followed_user=user)
+
+        follow_user.delete()
+
+        return redirect('users-list')

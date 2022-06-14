@@ -4,12 +4,24 @@
 
     <div>
 
-        {% for user in users %}
+        {% for user in users_to_follow %}
 
             <div>
                 <p>{{ user.username }}</p>
                 <p>{{ user.first_name }}</p>
                 <p>{{ user.last_name }}</p>
+
+                {% if user in followers %}
+                    <form method="POST" action="{% url 'remove-follower' user.pk %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-danger" type="submit">Se désabonner</button>
+                    </form>
+                {% else %}
+                    <form method="POST" action="{% url 'add-follower' user.pk %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-success" type="submit">S'abonner</button>
+                    </form>
+                {% endif %}
             </div>
 
             <br>

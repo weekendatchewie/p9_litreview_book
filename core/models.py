@@ -7,7 +7,15 @@ class User(AbstractUser):
     pass
 
     def __str__(self):
-        return self.username
+        return f"Utilisateur : {self.username}"
+
+    def followers(self):
+        list_follower = []
+
+        for follower in self.following.all():
+            list_follower.append(follower.followed_user)
+
+        return list_follower
 
 
 class UserFollows(models.Model):
@@ -16,3 +24,6 @@ class UserFollows(models.Model):
 
     class Meta:
         unique_together = ('user', 'followed_user')
+
+    def __str__(self):
+        return f"{self.user} abonné(e) à {self.followed_user}"
