@@ -1,5 +1,6 @@
 from itertools import chain
 
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
@@ -13,10 +14,10 @@ from review.models import Ticket, Review
 class HomePage(View):
 
     def get(self, request):
-        user = request.user.username
+        user = request.user
 
-        tickets = Ticket.objects.all()
-        reviews = Review.objects.all()
+        tickets = Ticket.objects.filter(Q(user__in=user.followers()) | Q(user=user))
+        reviews = Review.objects.filter(Q(user__in=user.followers()) | Q(user=user))
 
         """
         La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis, 

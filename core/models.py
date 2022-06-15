@@ -10,6 +10,9 @@ class User(AbstractUser):
         return f"Utilisateur : {self.username}"
 
     def followers(self):
+        """
+        Liste des gens que suit l'utilisateur
+        """
         list_follower = []
 
         for follower in self.following.all():
