@@ -5,7 +5,12 @@
     <div class="bloc-form-container">
 
         <p>{{ ticket.title }}</p>
-        <img src="{{ ticket.image.url }}" alt="">
+        {% if ticket.image %}
+            <img src="{{ ticket.image.url }}" alt="">
+        {% else %}
+            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzNzYzNn0?utm_source=dictionnaire&utm_medium=referral"
+                 alt="default book">
+        {% endif %}
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
