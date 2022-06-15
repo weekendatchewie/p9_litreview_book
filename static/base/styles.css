@@ -17,18 +17,18 @@
     background-color: #002B36;
     height: 70px;
     width: 100%;
-    color: antiquewhite;
+    color: #f5f6fa;
     overflow-x: hidden;
     position: fixed;
     justify-content: space-around;
-
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 .main {
-    margin-top: 125px;
+    margin-top: 70px;
+    width: 100%;
 }
 
 .navbar-content {
@@ -42,7 +42,7 @@
 
 .navbar-link, .navbar-link-deconnect {
     text-decoration: none;
-    color: antiquewhite;
+    color: #f5f6fa;
     font-size: 16px;
     font-weight: bold;
     transition: color 0.4s;

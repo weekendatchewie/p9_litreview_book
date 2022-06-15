@@ -1,0 +1,29 @@
+{#{% extends 'base.html' %}#}
+
+{% load review_tags %}
+
+{% block content %}
+
+    <div class="bloc-ticket">
+        <div class="header-ticket">
+            <p>{% get_poster_display ticket.user %} demandé une critique</p>
+            <p>{{ ticket.date_created|get_posted_at_display }}</p>
+        </div>
+        <h2 class="title-ticket">{{ ticket.title }}</h2>
+
+        <div class="body-ticket">
+        <p class="description-ticket">{{ ticket.description }}</p>
+
+        {% if ticket.image %}
+            <img class="img-ticket" src="{{ ticket.image.url }}" alt="">
+        {% endif %}
+        </div>
+
+        <div class="bloc-btn">
+            <button class="btn-ticket">
+                <a href="{% url 'review-answer' ticket.id %}">Créer avis</a>
+            </button>
+        </div>
+    </div>
+
+{% endblock %}

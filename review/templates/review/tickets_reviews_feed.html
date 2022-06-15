@@ -18,7 +18,6 @@
 
                 {% if instance|model_type == 'Ticket' %}
 
-                    <a href="{% url 'review-answer' instance.id %}">Créer avis</a>
                     <p>{{ instance.title }}</p>
                     <p>{{ instance.description }}</p>
                     {% if instance.image %}
