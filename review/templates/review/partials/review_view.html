@@ -24,12 +24,25 @@
             </div>
         </div>
 
-        {% if review.ticket.user == review.user and review.user != request.user %}
+        {% url 'home' as url_home %}
+        {% if request.path == url_home %}
+            {% if review.ticket.user == review.user and review.user != request.user %}
+                <div class="bloc-btn">
+                    <a href="{% url 'review-answer' review.ticket.id %}">
+                        <button class="btn-ticket">
+                            Créer avis
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+{#            {% url 'feed' as url_feed %}#}
+        {% else %}
             <div class="bloc-btn">
-                <a href="{% url 'review-answer' review.ticket.id %}">
-                    <button class="btn-ticket">
-                        Créer avis
-                    </button>
+                <a href="{% url 'review-update' review.id %}">
+                    <button class="btn-ticket btn-update">Modifier</button>
+                </a>
+                <a href="{% url 'review-delete' review.id %}">
+                    <button class="btn-ticket btn-update">Supprimer</button>
                 </a>
             </div>
         {% endif %}

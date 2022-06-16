@@ -19,13 +19,27 @@
             {% endif %}
         </div>
 
-        <div class="bloc-btn">
-            <a href="{% url 'review-answer' ticket.id %}">
-                <button class="btn-ticket">
-                    Créer avis
-                </button>
-            </a>
-        </div>
+        {% url 'home' as url_home %}
+        {% if request.path == url_home %}
+            <div class="bloc-btn">
+                    <a href="{% url 'review-answer' ticket.id %}">
+                        <button class="btn-ticket">
+                            Créer avis
+                        </button>
+                    </a>
+            </div>
+
+{#                {% url 'feed' as url_feed %}#}
+                {% else %}
+                <div class="bloc-btn">
+                    <a href="{% url 'ticket-update' ticket.id %}">
+                        <button class="btn-ticket btn-update">Modifier</button>
+                    </a>
+                    <a href="{% url 'ticket-delete' ticket.id %}">
+                        <button class="btn-ticket btn-update">Supprimer</button>
+                    </a>
+            </div>
+        {% endif %}
     </div>
 
 {% endblock %}
