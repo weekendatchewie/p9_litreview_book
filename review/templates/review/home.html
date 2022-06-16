@@ -30,10 +30,7 @@
                     {% include "review/partials/ticket_view.html" with ticket=instance %}
 
                 {% elif instance|model_type == 'Review' %}
-                    <p>{{ instance.headline }}</p>
-                    {% if instance.body %}
-                        <p>{{ instance.body }}</p>
-                    {% endif %}
+                    {% include "review/partials/review_view.html" with review=instance %}
                 {% endif %}
 
             {% empty %}

@@ -84,3 +84,19 @@ body {
     font-weight: 900;
     font-size: 18px;
 }
+
+.bloc-review-ticket {
+    padding: 15px;
+    border: 1.5px solid #0D6B82;
+    border-radius: 10px;
+}
+
+.bloc-review-ticket p {
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.bloc-img-ticket-review {
+    display: flex;
+}

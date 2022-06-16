@@ -1,0 +1,36 @@
+{% load review_tags %}
+
+{% block content %}
+
+    <div class="bloc-ticket">
+        <div class="header-ticket">
+            <p>{% get_poster_display review.user %} publié une critique</p>
+            <p>{{ review.date_created|get_posted_at_display }}</p>
+        </div>
+        <h2 class="title-ticket">{{ review.headline }}</h2>
+
+        <div class="body-ticket">
+
+            <p class="description-ticket">{{ review.body }}</p>
+
+            <div class="bloc-review-ticket">
+                <p>Ticket {{ review.ticket.user }}</p>
+                <p>{{ review.ticket.title }}</p>
+                {% if review.ticket.image %}
+                    <div class="bloc-img-ticket-review">
+                        <img class="img-ticket" src="{{ review.ticket.image.url }}" alt="">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if review.ticket.user == review.user and review.user != request.user %}
+            <div class="bloc-btn">
+                <button class="btn-ticket">
+                    <a href="{% url 'review-answer' review.ticket.id %}">Créer avis</a>
+                </button>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
