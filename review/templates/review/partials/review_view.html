@@ -26,9 +26,11 @@
 
         {% if review.ticket.user == review.user and review.user != request.user %}
             <div class="bloc-btn">
-                <button class="btn-ticket">
-                    <a href="{% url 'review-answer' review.ticket.id %}">Créer avis</a>
-                </button>
+                <a href="{% url 'review-answer' review.ticket.id %}">
+                    <button class="btn-ticket">
+                        Créer avis
+                    </button>
+                </a>
             </div>
         {% endif %}
     </div>

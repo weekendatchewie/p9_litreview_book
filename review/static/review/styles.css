@@ -2,6 +2,71 @@ body {
     background-color: #0D6B82;
 }
 
+.bloc-main-title {
+    display: flex;
+    align-items: flex-end;
+    margin: 25px 0;
+    padding: 0 40px;
+}
+
+.main-bloc-follows {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    align-items: flex-end;
+    color: #f5f6fa;
+}
+
+.nb-follows {
+    text-align: center;
+}
+
+.main-title {
+    margin-left: 3%;
+    color: #f5f6fa;
+    font-size: 30px;
+    width: 30%;
+}
+
+.date {
+    width: 30%;
+    text-align: end;
+    color: #002B36;
+}
+
+hr {
+    margin: 0 50px;
+    background-color: #002B36;
+    border: none;
+    height: 4px;
+}
+
+.bloc-creation-btn {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.bloc-creation-btn button {
+    width: 150px;
+    padding: 15px;
+    background: rgba(0, 140, 122, 1);
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px 0 #05393b;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.5s;
+    color: #f5f6fa;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.bloc-creation-btn button:hover {
+    filter: brightness(1.3);
+}
+
 .bloc-review {
     display: grid;
     grid-template-columns: 1fr;
@@ -33,7 +98,7 @@ body {
 
 .title-ticket {
     font-size: 25px;
-    color: #0D6B82;
+    color: rgba(0, 140, 122, 1);
     font-weight: 900;
     margin-bottom: 10px;
 }
@@ -60,13 +125,16 @@ body {
 .btn-ticket {
     width: 150px;
     padding: 15px;
-    background: #0D6B82;
+    background: rgba(0, 140, 122, 1);
     border-radius: 5px;
     margin: 5px 0;
     box-shadow: 3px 3px 4px 0 #05393b;
     border: none;
     cursor: pointer;
     transition: filter 0.5s;
+    color: #f5f6fa;
+    font-weight: 900;
+    font-size: 18px;
 }
 
 .bloc-btn {
@@ -76,13 +144,6 @@ body {
 
 .btn-ticket:hover {
     filter: brightness(1.3);
-}
-
-.btn-ticket a {
-    text-decoration: none;
-    color: #f5f6fa;
-    font-weight: 900;
-    font-size: 18px;
 }
 
 .bloc-review-ticket {

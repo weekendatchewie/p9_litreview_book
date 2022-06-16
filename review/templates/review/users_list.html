@@ -11,7 +11,7 @@
                 <p>{{ user.first_name }}</p>
                 <p>{{ user.last_name }}</p>
 
-                {% if user in followers %}
+                {% if user in followed_people %}
                     <form method="POST" action="{% url 'remove-follower' user.pk %}">
                         {% csrf_token %}
                         <button class="btn btn-outline-danger" type="submit">Se désabonner</button>

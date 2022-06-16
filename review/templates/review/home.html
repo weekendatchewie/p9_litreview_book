@@ -9,17 +9,38 @@
 
 {% block content %}
 
-    <div>
-        <h1>Bienvenue {{ user.username }}</h1>
-
+    <div class="bloc-main-title">
+        <h1 class="main-title">Bienvenue {{ user.username }} !</h1>
+        <div class="main-bloc-follows">
+            <div class="bloc-followers">
+                <p class="nb-follows">{{ user.count_followers }}</p>
+                <p>Abonné{{ user.count_followers|pluralize }}</p>
+            </div>
+            <div class="bloc-following">
+                <p class="nb-follows">{{ user.count_followed_people }}</p>
+                <p>Abonnement{{ user.count_followed_people|pluralize }}</p>
+            </div>
+        </div>
+        <p class="date">{{ today|date:'d F Y' }}</p>
     </div>
 
-        <div class="sidebar">
-            <a href="{% url 'ticket-create' %}">Créer Ticket</a>
-            <a href="{% url 'review-create' %}">Créer Avis</a>
-        </div>
-    <div class="container">
+    <hr>
 
+
+    <div class="bloc-creation-btn">
+        <a href="{% url 'ticket-create' %}">
+            <button>
+                Créer Ticket
+            </button>
+        </a>
+        <a href="{% url 'review-create' %}">
+            <button>
+                Créer Avis
+            </button>
+        </a>
+    </div>
+
+    <div class="container">
 
         <div class="bloc-review">
 

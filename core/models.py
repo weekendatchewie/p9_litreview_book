@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
@@ -9,16 +11,36 @@ class User(AbstractUser):
     def __str__(self):
         return f"Utilisateur : {self.username}"
 
-    def followers(self):
+    @property
+    def followed_people(self):
         """
         Liste des gens que suit l'utilisateur
         """
-        list_follower = []
+        list_followed_people = []
 
-        for follower in self.following.all():
-            list_follower.append(follower.followed_user)
+        for followed_people in self.following.all():
+            list_followed_people.append(followed_people.followed_user)
 
-        return list_follower
+        return list_followed_people
+
+    def count_followed_people(self):
+        return len(self.followed_people)
+
+    @property
+    def followers(self):
+        """
+        Liste des gens qui suivent l'utilisateur
+        """
+
+        list_followers = []
+
+        for follower in self.followed_by.all():
+            if follower.user != self:
+                list_followers.append(follower.user)
+        return list_followers
+
+    def count_followers(self):
+        return len(self.followers)
 
 
 class UserFollows(models.Model):

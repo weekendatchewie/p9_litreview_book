@@ -1,3 +1,4 @@
+from datetime import datetime
 from itertools import chain
 
 from django.db.models import Q
@@ -16,8 +17,8 @@ class HomePage(View):
     def get(self, request):
         user = request.user
 
-        tickets = Ticket.objects.filter(Q(user__in=user.followers()) | Q(user=user))
-        reviews = Review.objects.filter(Q(user__in=user.followers()) | Q(user=user))
+        tickets = Ticket.objects.filter(Q(user__in=user.followed_people) | Q(user=user))
+        reviews = Review.objects.filter(Q(user__in=user.followed_people) | Q(user=user))
 
         """
         La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis, 
@@ -25,10 +26,13 @@ class HomePage(View):
         """
         tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
 
+        today = datetime.now()
+
         context = {
             'user': user,
             'tickets': tickets,
-            'tickets_and_reviews': tickets_and_reviews
+            'tickets_and_reviews': tickets_and_reviews,
+            'today': today
         }
 
         return render(request, "review/home.html", context)
@@ -213,13 +217,13 @@ class UsersList(View):
         user = request.user
         users_to_follow = User.objects.all().exclude(id=request.user.id)
 
-        list_follower = user.followers()
+        list_followed_people = user.followed_people
 
-        user.followers()
+        # user.followers
 
         context = {
             "users_to_follow": users_to_follow,
-            "followers": list_follower,
+            "followed_people": list_followed_people,
         }
 
         return render(request, 'review/users_list.html', context)
