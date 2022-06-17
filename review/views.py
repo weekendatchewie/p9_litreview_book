@@ -80,7 +80,16 @@ class TicketsReviewsFeed(View):
 
         tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
 
-        return render(request, 'review/tickets_reviews_feed.html', context={"tickets_and_reviews": tickets_and_reviews})
+        paginator = Paginator(tickets_and_reviews, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {
+            "tickets_and_reviews": tickets_and_reviews,
+            "page_obj": page_obj
+        }
+
+        return render(request, 'review/tickets_reviews_feed.html', context)
 
 
 class TicketUpdate(View):

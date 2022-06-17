@@ -19,7 +19,7 @@
 
         <div class="bloc-review">
 
-            {% for instance in tickets_and_reviews %}
+            {% for instance in page_obj %}
 
                 {% if instance|model_type == 'Ticket' %}
 
@@ -37,6 +37,24 @@
 
 
         </div>
+
+        {% if page_obj %}
+            <div class="paginator-container">
+                {% if page_obj.has_previous %}
+                    <a class="link-page" href="?page=1">« première</a>
+                    <a class="link-page" href="?page={{ page_obj.previous_page_number }}">précédente</a>
+                {% endif %}
+
+                <span class="bloc-nb-page">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+            </span>
+
+                {% if page_obj.has_next %}
+                    <a class="link-page" href="?page={{ page_obj.next_page_number }}">suivante</a>
+                    <a class="link-page" href="?page={{ page_obj.paginator.num_pages }}">dernière »</a>
+                {% endif %}
+            </div>
+        {% endif %}
 
     </div>
 
