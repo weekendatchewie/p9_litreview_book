@@ -5,7 +5,8 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DeleteView, ListView
+from django.views.generic import DeleteView
+from django.core.paginator import Paginator
 
 from core.models import User, UserFollows
 from review import forms
@@ -28,11 +29,17 @@ class HomePage(View):
 
         today = datetime.now()
 
+        # Pagination : On met le nombre d'élément que l'on souhaite par page
+        paginator = Paginator(tickets_and_reviews, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
             'user': user,
             'tickets': tickets,
             'tickets_and_reviews': tickets_and_reviews,
-            'today': today
+            'today': today,
+            'page_obj': page_obj
         }
 
         return render(request, "review/home.html", context)

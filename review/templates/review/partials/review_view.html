@@ -7,7 +7,7 @@
             <p>{% get_poster_display review.user %} publié une critique</p>
             <p>{{ review.date_created|get_posted_at_display }}</p>
         </div>
-        <h2 class="title-ticket">{{ review.headline }}</h2>
+        <h2 class="title-ticket">{{ review.headline }} - {{ review.rating }}</h2>
 
         <div class="body-ticket">
 
@@ -35,7 +35,7 @@
                     </a>
                 </div>
             {% endif %}
-{#            {% url 'feed' as url_feed %}#}
+            {#            {% url 'feed' as url_feed %}#}
         {% else %}
             <div class="bloc-btn">
                 <a href="{% url 'review-update' review.id %}">
