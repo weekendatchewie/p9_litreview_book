@@ -235,11 +235,16 @@ class UsersList(View):
 
         list_followed_people = user.followed_people
 
+        paginator = Paginator(users_to_follow, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         # user.followers
 
         context = {
             "users_to_follow": users_to_follow,
             "followed_people": list_followed_people,
+            "page_obj": page_obj
         }
 
         return render(request, 'review/users_list.html', context)
