@@ -13,7 +13,7 @@ body {
 
 .login-form, .signup-form {
     background: #fff;
-    width: 550px;
+    width: 580px;
     margin: 2%;
     display: flex;
     flex-direction: column;
