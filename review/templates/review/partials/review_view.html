@@ -26,7 +26,7 @@
 
         {% url 'home' as url_home %}
         {% if request.path == url_home %}
-            {% if review.ticket.user == review.user and review.user != request.user %}
+            {% if review.ticket.id not in request.user.user_reviews %}
                 <div class="bloc-btn">
                     <a href="{% url 'review-answer' review.ticket.id %}">
                         <button class="btn-ticket">

@@ -42,6 +42,21 @@ class User(AbstractUser):
     def count_followers(self):
         return len(self.followers)
 
+    @property
+    def user_reviews(self):
+        """
+        Liste des id des tickets associés aux critiques. Permet de conditionner l'affichage d'un bouton "créer avis"
+        Si un utilisateur a déjà posté une critique sur un ticket, il ne pourra pas reposter une critique
+        """
+        list_user_reviews = []
+
+        for review in self.review_set.all():
+            if review:
+                list_user_reviews.append(review.ticket.id)
+                print(f"{review.ticket}, id: {review.ticket.id}")
+
+        return list_user_reviews
+
 
 class UserFollows(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='following', on_delete=models.CASCADE)

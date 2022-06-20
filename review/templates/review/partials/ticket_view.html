@@ -21,6 +21,7 @@
 
         {% url 'home' as url_home %}
         {% if request.path == url_home %}
+            {% if ticket.id not in request.user.user_reviews %}
             <div class="bloc-btn">
                     <a href="{% url 'review-answer' ticket.id %}">
                         <button class="btn-ticket">
@@ -28,6 +29,7 @@
                         </button>
                     </a>
             </div>
+            {% endif %}
 
 {#                {% url 'feed' as url_feed %}#}
                 {% else %}

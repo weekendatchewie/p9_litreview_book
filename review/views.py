@@ -17,9 +17,13 @@ class HomePage(View):
 
     def get(self, request):
         user = request.user
+        user.user_reviews
 
         tickets = Ticket.objects.filter(Q(user__in=user.followed_people) | Q(user=user))
         reviews = Review.objects.filter(Q(user__in=user.followed_people) | Q(user=user))
+
+        for ticket in tickets:
+            print(f"{ticket}, id : {ticket.id}")
 
         """
         La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis, 
