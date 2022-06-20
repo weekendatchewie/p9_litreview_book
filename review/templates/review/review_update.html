@@ -1,20 +1,40 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'review/styles.css' %}?{% now "U" %}">
+{% endblock %}
+
 {% block content %}
 
-    <div class="bloc-form-container">
 
-        <h2>Modifier l'avis</h2>
+    <h2 class="title-form">Modifier l'avis</h2>
+    <div class="bloc-form-container">
 
         <p>{{ ticket.title }}</p>
         {% if ticket.image %}
-            <img src="{{ ticket.image.url }}" alt="">
+            <img class="img-update" src="{{ ticket.image.url }}" alt="">
         {% endif %}
+
+
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ review_form.as_p }}
 
-            <button type="submit">Valider</button>
+            <div class="input-field">
+                <label class="input-label" for="headline">{{ review_form.headline.label }}</label>
+                {{ review_form.headline }}
+            </div>
+            <div class="input-field">
+                <label class="input-label" for="body">{{ review_form.body.label }}</label>
+                {{ review_form.body }}
+            </div>
+            <div class="input-field">
+                <label class="input-label" for="rating">{{ review_form.rating.label }}</label>
+                {{ review_form.rating }}
+            </div>
+
+            <button type="submit" class="btn-validate">Valider</button>
 
         </form>
 
