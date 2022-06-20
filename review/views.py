@@ -11,19 +11,18 @@ from django.core.paginator import Paginator
 from core.models import User, UserFollows
 from review import forms
 from review.models import Ticket, Review
+from review.utils import stars_rating
 
 
 class HomePage(View):
 
     def get(self, request):
         user = request.user
-        user.user_reviews
 
         tickets = Ticket.objects.filter(Q(user__in=user.followed_people) | Q(user=user))
         reviews = Review.objects.filter(Q(user__in=user.followed_people) | Q(user=user))
 
-        for ticket in tickets:
-            print(f"{ticket}, id : {ticket.id}")
+        stars_rating(reviews)
 
         """
         La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis, 
@@ -81,6 +80,8 @@ class TicketsReviewsFeed(View):
     def get(self, request):
         tickets = Ticket.objects.filter(user=request.user)
         reviews = Review.objects.filter(user=request.user)
+
+        stars_rating(reviews)
 
         tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
 
