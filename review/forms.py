@@ -3,6 +3,15 @@ from review.models import Ticket, Review
 
 
 class TicketForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({'class': 'input_headline', "placeholder": " "})
+        self.fields['title'].label = "Titre"
+
+        self.fields['description'].widget.attrs.update({'class': 'input_body', "placeholder": " "})
+        self.fields['description'].label = "Description"
+
     class Meta:
         model = Ticket
         fields = ['title', 'description', 'image']
