@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'review/styles.css' %}?{% now "U" %}">
+{% endblock %}
+
 {% block content %}
 
     <div class="bloc-form-container">
@@ -8,10 +14,17 @@
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div class="input-field">
+                <label class="input-label" for="title">{{ form.title.label }}</label>
+                {{ form.title }}
+            </div>
+            <div class="input-field">
+                <label class="input-label" for="description">{{ form.description.label }}</label>
+                {{ form.description }}
+            </div>
+            {{ form.image }}
 
-            <button type="submit">Valider</button>
-
+            <button type="submit" class="btn-validate">Valider</button>
         </form>
 
     </div>
