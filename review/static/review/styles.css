@@ -265,3 +265,8 @@ hr {
     box-shadow: 2px 3px 6px 0 #2e2d2d;
     margin: 10px 0;
 }
+
+.text-delete {
+    margin: 55px 0;
+    font-size: 22px;
+}

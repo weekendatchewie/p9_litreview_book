@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'review/styles.css' %}?{% now "U" %}">
+{% endblock %}
+
 {% block content %}
 
-    <form action="" method="post">
-        {% csrf_token %}
+    <div class="bloc-form-container">
 
-        <p>Vous êtes sûr de vouloir supprimer ?</p>
+        <form action="" method="post">
+            {% csrf_token %}
 
-        <input type="submit" value="Oui">
+            <p class="text-delete">Vous êtes sûr de vouloir supprimer ?</p>
 
-    </form>
+            <button type="submit" class="btn-validate">Oui</button>
+
+        </form>
+    </div>
 
 {% endblock %}

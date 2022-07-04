@@ -104,6 +104,9 @@ class TicketUpdate(View):
 
         form = forms.TicketForm(instance=ticket)
 
+        if request.user != ticket.user:
+            return redirect('tickets_reviews_feed')
+
         context = {
             "form": form,
         }
@@ -125,6 +128,11 @@ class TicketDelete(DeleteView):
     model = Ticket
     template_name = "review/review_delete.html"
     success_url = reverse_lazy("tickets_reviews_feed")
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.model.user:
+            return redirect('tickets_reviews_feed')
+        return super(TicketDelete, self).dispatch(request, *args, **kwargs)
 
 
 class ReviewCreate(View):
@@ -173,6 +181,9 @@ class ReviewUpdate(View):
 
         review_form = self.review_form_class(instance=review)
 
+        if request.user != review.user:
+            return redirect('tickets_reviews_feed')
+
         context = {
             "ticket": ticket,
             "review_form": review_form,
@@ -195,6 +206,11 @@ class ReviewDelete(DeleteView):
     model = Review
     template_name = "review/review_delete.html"
     success_url = reverse_lazy("tickets_reviews_feed")
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.model.user:
+            return redirect('tickets_reviews_feed')
+        return super(ReviewDelete, self).dispatch(request, *args, **kwargs)
 
 
 class ReviewAnswerToTicket(View):
