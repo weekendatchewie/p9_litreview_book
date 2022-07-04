@@ -1,5 +1,3 @@
-from itertools import chain
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
@@ -45,7 +43,8 @@ class User(AbstractUser):
     @property
     def user_reviews(self):
         """
-        Liste des id des tickets associés aux critiques. Permet de conditionner l'affichage d'un bouton "créer avis"
+        Liste des id des tickets associés aux critiques.
+        Permet de conditionner l'affichage d'un bouton "créer avis"
         Si un utilisateur a déjà posté une critique sur un ticket, il ne pourra pas reposter une critique
         """
         list_user_reviews = []
