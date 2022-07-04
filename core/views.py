@@ -6,7 +6,6 @@ from core.forms import LoginForm, SignupForm
 
 
 class LoginPage(View):
-
     form_class = LoginForm
     template_name = "core/login.html"
 
@@ -53,7 +52,6 @@ class LoginPage(View):
 
 
 class SignupPage(View):
-
     form_class = SignupForm
 
     def get(self, request):
@@ -78,8 +76,6 @@ class SignupPage(View):
 
 
 def logout_user(request):
-
     logout(request)
 
     return redirect('login')
-
