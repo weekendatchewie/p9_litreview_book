@@ -7,6 +7,15 @@
 
 {% block authentication %}
     <div class="container">
+
+        {% if message %}
+            <div class="error-container">
+                <div class="error-list">
+                    {{ message }}
+                </div>
+            </div>
+        {% endif %}
+
         <div class="login-form">
             <form action="" method="post">
 
@@ -30,9 +39,8 @@
                 </div>
 
             </form>
-
-
         </div>
+
         <div class="signup-link">
             <a href="{% url 'signup' %}">S'inscrire</a>
         </div>
