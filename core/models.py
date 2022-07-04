@@ -52,7 +52,6 @@ class User(AbstractUser):
         for review in self.review_set.all():
             if review:
                 list_user_reviews.append(review.ticket.id)
-                print(f"{review.ticket}, id: {review.ticket.id}")
 
         return list_user_reviews
 
