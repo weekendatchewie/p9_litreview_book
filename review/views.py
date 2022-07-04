@@ -25,7 +25,7 @@ class HomePage(View):
         stars_rating(reviews)
 
         """
-        La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis, 
+        La méthode 'itertools.chain' retourne un itérateur qui itère sur tous les éléments itérables fournis,
         comme s’il s’agissait d’une seule séquence d’objets.
         """
         tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
