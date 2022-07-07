@@ -1,6 +1,7 @@
 from datetime import datetime
 from itertools import chain
 
+import objects as objects
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -130,7 +131,10 @@ class TicketDelete(DeleteView):
     success_url = reverse_lazy("tickets_reviews_feed")
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user != self.model.user:
+        id_ticket = kwargs['pk']
+        ticket = get_object_or_404(self.model, id=id_ticket)
+
+        if request.user != ticket.user:
             return redirect('tickets_reviews_feed')
         return super(TicketDelete, self).dispatch(request, *args, **kwargs)
 
@@ -208,7 +212,10 @@ class ReviewDelete(DeleteView):
     success_url = reverse_lazy("tickets_reviews_feed")
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user != self.model.user:
+        id_review = kwargs['pk']
+        review = get_object_or_404(self.model, id=id_review)
+
+        if request.user != review.user:
             return redirect('tickets_reviews_feed')
         return super(ReviewDelete, self).dispatch(request, *args, **kwargs)
 
