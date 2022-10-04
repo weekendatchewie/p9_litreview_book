@@ -53,23 +53,23 @@ hr {
     margin-bottom: 10px;
 }
 
-.bloc-creation-btn button {
-    width: 150px;
-    padding: 15px;
-    background: rgba(0, 140, 122, 1);
-    border-radius: 5px;
-    box-shadow: 3px 3px 4px 0 #05393b;
-    border: none;
-    cursor: pointer;
-    transition: filter 0.5s;
-    color: #f5f6fa;
-    font-weight: 900;
-    font-size: 18px;
-}
+/*.bloc-creation-btn button {*/
+/*    width: 150px;*/
+/*    padding: 15px;*/
+/*    background: rgba(0, 140, 122, 1);*/
+/*    border-radius: 5px;*/
+/*    box-shadow: 3px 3px 4px 0 #05393b;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    transition: filter 0.5s;*/
+/*    color: #f5f6fa;*/
+/*    font-weight: 900;*/
+/*    font-size: 18px;*/
+/*}*/
 
-.bloc-creation-btn button:hover {
-    filter: brightness(1.3);
-}
+/*.bloc-creation-btn button:hover {*/
+/*    filter: brightness(1.3);*/
+/*}*/
 
 .bloc-review {
     display: grid;
@@ -132,13 +132,17 @@ hr {
     background: rgba(0, 140, 122, 1);
     border-radius: 5px;
     margin: 5px 0;
-    box-shadow: 3px 3px 4px 0 #05393b;
+    box-shadow: 4px 5px 0 3px #05393b;
     border: none;
     cursor: pointer;
-    transition: filter 0.5s;
+    transition: all 0.2s linear;
     color: #f5f6fa;
     font-weight: 900;
     font-size: 18px;
+
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .bloc-btn {
@@ -156,6 +160,9 @@ hr {
 
 .btn-ticket:hover, .btn-to-follow:hover, .btn-followed:hover, .btn-validate:hover {
     filter: brightness(1.3);
+    left: 4px;
+    top: 5px;
+    box-shadow: none;
 }
 
 .bloc-review-ticket {
