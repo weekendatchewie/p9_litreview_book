@@ -1,7 +1,6 @@
 from datetime import datetime
 from itertools import chain
 
-import objects as objects
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -16,6 +15,7 @@ from review.utils import stars_rating
 
 
 PAGINATOR_NB = 6
+FOLLOWER_PAGINATOR_NB = 8
 
 
 class HomePage(View):
@@ -266,7 +266,7 @@ class UsersList(View):
 
         list_followed_people = user.followed_people
 
-        paginator = Paginator(users_to_follow, PAGINATOR_NB)
+        paginator = Paginator(users_to_follow, FOLLOWER_PAGINATOR_NB)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
