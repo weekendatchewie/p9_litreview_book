@@ -15,6 +15,9 @@ from review.models import Ticket, Review
 from review.utils import stars_rating
 
 
+PAGINATOR_NB = 6
+
+
 class HomePage(View):
 
     def get(self, request):
@@ -34,7 +37,7 @@ class HomePage(View):
         today = datetime.now()
 
         # Pagination : On met le nombre d'élément que l'on souhaite par page
-        paginator = Paginator(tickets_and_reviews, 4)
+        paginator = Paginator(tickets_and_reviews, PAGINATOR_NB)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
@@ -86,7 +89,7 @@ class TicketsReviewsFeed(View):
 
         tickets_and_reviews = sorted(chain(tickets, reviews), key=lambda x: x.date_created, reverse=True)
 
-        paginator = Paginator(tickets_and_reviews, 4)
+        paginator = Paginator(tickets_and_reviews, PAGINATOR_NB)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
@@ -263,7 +266,7 @@ class UsersList(View):
 
         list_followed_people = user.followed_people
 
-        paginator = Paginator(users_to_follow, 4)
+        paginator = Paginator(users_to_follow, PAGINATOR_NB)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
